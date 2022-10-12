@@ -39,6 +39,15 @@ const router = createRouter({
         { path: "/:notFound(.*)", component: NotFound }, //for url.com/fjdksjfds it will redirect to team
     ],
     linkActiveClass: "active", //for css shortcut for active class
+
+    // scrollBehavior(to, from, savedPosition){},
+    scrollBehavior(to, from, savedPosition) {
+        console.log(to, from, savedPosition)
+        if (savedPosition) {
+            return savedPosition;
+        }
+        return { left: 0, top: 0 }
+    },
 });
 
 const app = createApp(App);

@@ -1,4 +1,5 @@
 <template>
+  <button @click="saveChange">Save Changes</button>
   <ul>
     <user-item
       v-for="user in users"
@@ -18,9 +19,39 @@ export default {
   },
   inject: ["users"],
 
+  data() {
+    return { changeSaved: false }; //dummy code
+  },
+
+  methods: {
+    saveChange() {
+      this.changeSaved = true;
+    }, //this warns we are leaving the page
+  },
+
   beforeRouteEnter(to, from, next) {
     console.log("unserlist cmp beforerouterenter ======>", to, from);
     next();
+  },
+
+  // beforeRouteLeave(to, from, next) {
+  //   // ...
+  // },
+
+  //if user leaves the pages without saving the changes the confirm leave msg will showed up
+  beforeRouteLeave(to, from, next) {
+    console.log("userlist cmp beforerouteleaves====> ", to, from);
+
+    if (this.changeSaved) {
+      next();
+    } else {
+      const userWantToLeave = confirm("are you sure, didn't saved the changes");
+      next(userWantToLeave);
+    }
+  },
+
+  unmounted() {
+    console.log("unmounted");
   },
 };
 </script>

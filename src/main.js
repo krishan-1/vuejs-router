@@ -53,17 +53,23 @@ router.beforeEach(function (to, from, next) {
     console.log('global beforeEach ====>')
     console.log(to, from)
     //======example
-    if (to.name === 'team-members') {
-        next();
+    // if (to.name === 'team-members') {
+    //     next();
 
-    } else {
-        next({
-            name: 'team-members', params: { teamId: 't2' }
-        })
-    }
+    // } else {
+    //     next({
+    //         name: 'team-members', params: { teamId: 't2' }
+    //     })
+    // }
 
 
     next()
+});
+
+router.afterEach(function (to, from) {
+    //sending analytics data
+
+    console.log('Global afterEach', to, from)
 })
 
 const app = createApp(App);

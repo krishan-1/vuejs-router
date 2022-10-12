@@ -17,6 +17,11 @@ export default {
     UserItem,
   },
   inject: ["users"],
+
+  beforeRouteEnter(to, from, next) {
+    console.log("unserlist cmp beforerouterenter ======>", to, from);
+    next();
+  },
 };
 </script>
 
